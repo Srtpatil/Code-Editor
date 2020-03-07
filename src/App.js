@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Editor from './component/editor/editor'
 import './App.css';
 
 class App extends Component{
@@ -6,6 +7,7 @@ class App extends Component{
     return(
       <div>
         <h1>Hello World!</h1>
+        <Editor />
       </div>
     )
   }
