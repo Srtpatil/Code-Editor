@@ -5,10 +5,10 @@ import "codemirror/lib/codemirror.css";
 import "./App.css";
 
 class App extends Component {
-  state = {
-    code: "",
-    theme: "",
-    language: "",
+  state = {    
+    code: "hello World!",
+    theme: "dracula",
+    language: "clike",
     isFullScreen: false
   };
 
@@ -17,22 +17,35 @@ class App extends Component {
       code: newCode
     });
   };
+
+  selectHandler = e => {
+    if (e.target.id === "theme") {
+      this.setState({
+        theme: e.target.value
+      });
+    } else if (e.target.id === "language") {
+      this.setState({
+        language: e.target.value
+      });
+    }
+
+    console.log(this.state);
+  };
   render() {
     return (
       <div>
         <h1>Code Editor</h1>
-        <Toolbar />
-        <div className="editor-container">
-          <Editor
-            changed={this.editorUpdated}
-            title=""
-            width=""
-            height=""
-            theme="dracula"
-            language={this.state.language}
-            value={this.state.code}
-          />
-        </div>
+
+        <Toolbar selected={this.selectHandler} />
+        <Editor
+          changed={this.editorUpdated}
+          title=""
+          width=""
+          height=""
+          theme={this.state.theme}
+          language={this.state.language}
+          value={this.state.code}
+        />
       </div>
     );
   }
