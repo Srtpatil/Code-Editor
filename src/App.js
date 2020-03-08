@@ -6,8 +6,8 @@ import "./App.css";
 class App extends Component {
   state = {
     code: "hello World!",
-    theme: "",
-    language: "",
+    theme: "dracula",
+    language: "clike",
     isFullScreen: false
   };
 
@@ -16,11 +16,25 @@ class App extends Component {
       code: newCode
     });
   };
+
+  selectHandler = e => {
+    if (e.target.id === "theme") {
+      this.setState({
+        theme: e.target.value
+      });
+    } else if (e.target.id === "language") {
+      this.setState({
+        language: e.target.value
+      });
+    }
+
+    console.log(this.state);
+  };
   render() {
     return (
       <div>
         <h1>Code Editor</h1>
-        <Toolbar />
+        <Toolbar selected={this.selectHandler} />
         <Editor
           changed={this.editorUpdated}
           title=""
