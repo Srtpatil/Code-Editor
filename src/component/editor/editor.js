@@ -11,15 +11,15 @@ class Editor extends Component {
   render() {
     return (
       <CodeMirror
-        value="Demo text"
+        value={this.props.value}
         options={{
-          mode: "xml",
-          theme: "dracula",
+          mode: this.props.language,
+          theme: this.props.theme,
           lineNumbers: true,
           autoCloseTags: true,
           autofocus: true
         }}
-        onChange={(editor, data, value) => {}}
+        onChange={this.props.changed}
       />
     );
   }
