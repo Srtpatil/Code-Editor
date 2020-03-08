@@ -1,22 +1,29 @@
 import React, { Component } from "react";
-
+import Dropdown from "../dropdown/dropdown";
 class Toolbar extends Component {
+  languages = {
+    clike: ["C", "C++", "Java"],
+    Python: "Python"
+  };
+
+  themes = {
+    dracula: "dracula",
+    material: "material"
+  };
   render() {
     return (
       <div className="toolbar">
-        <select id="lang">
-          <option value="clike">C</option>
-          <option value="clike">C++</option>
-          <option value="clike">Java</option>
-          <option value="Python">Python</option>
-        </select>
+        <Dropdown
+          options={this.languages}
+          selected={this.props.selected}
+          id="language"
+        />
 
-        <select id="Theme">
-          <option value="clike">C</option>
-          <option value="clike">C++</option>
-          <option value="clike">Java</option>
-          <option value="Python">Python</option>
-        </select>
+        <Dropdown
+          options={this.themes}
+          selected={this.props.selected}
+          id="theme"
+        />
       </div>
     );
   }
