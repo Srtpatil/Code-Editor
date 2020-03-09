@@ -26,7 +26,7 @@ class Toolbar extends Component {
           id="theme"
         />
 
-        <Button>
+        <Button click={this.props.fullScreen}>
           <span class="glyphicon glyphicon-fullscreen"></span>
         </Button>
         <Button>

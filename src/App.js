@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Editor from "./component/editor/editor";
 import Toolbar from "./component/toolbar/toolbar";
-import "codemirror/lib/codemirror.css";
 import "./App.css";
 
 class App extends Component {
-  state = {    
+  state = {
     code: "hello World!",
     theme: "dracula",
     language: "clike",
@@ -31,21 +30,50 @@ class App extends Component {
 
     console.log(this.state);
   };
+
+  fullScreenToggle = () => {
+
+    this.setState(prevState => {
+      return {
+        isFullScreen: !prevState.isFullScreen
+      };
+    });
+  };
+
   render() {
+
     return (
       <div>
         <h1>Code Editor</h1>
 
-        <Toolbar selected={this.selectHandler} />
-        <Editor
-          changed={this.editorUpdated}
-          title=""
-          width=""
-          height=""
-          theme={this.state.theme}
-          language={this.state.language}
-          value={this.state.code}
+        <Toolbar
+          selected={this.selectHandler}
+          fullScreen={this.fullScreenToggle}
         />
+        <div className="editor-container">
+          <Editor
+            changed={this.editorUpdated}
+            title=""
+            width=""
+            height=""
+            theme={this.state.theme}
+            language={this.state.language}
+            value={this.state.code}
+            isFullScreen={this.state.isFullScreen}
+          />
+        </div>
+
+        <div className="in-out-container">
+          <Editor
+              changed={this.editorUpdated}
+              title=""
+              width=""
+              height=""
+              theme={this.state.theme}
+              value={this.state.code}
+            />
+        </div>
+        
       </div>
     );
   }
