@@ -10,14 +10,19 @@ import "./editor.css";
 import "codemirror/addon/display/fullscreen.css";
 import "codemirror/addon/display/fullscreen";
 
-
-
 class Editor extends Component {
-  render() {
+  cm = null;
 
+  render() {
+    if (this.props.reset) {
+      let editor = this.cm.getCodeMirror();
+      editor.setValue("");
+
+      this.props.helper();
+    }
     return (
       <CodeMirror
-        value={this.props.value}
+        ref={c => (this.cm = c)}
         options={{
           mode: this.props.language,
           theme: this.props.theme,
@@ -31,7 +36,6 @@ class Editor extends Component {
             Esc: function(cm) {
               if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
             }
-          
           }
         }}
         onChange={this.props.changed}
