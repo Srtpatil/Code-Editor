@@ -18,8 +18,13 @@ class Editor extends Component {
     if (this.props.reset) {
       let editor = this.cm.getCodeMirror();
       editor.setValue("");
-
       this.props.helper();
+    }
+
+    if (this.props.value !== "" && this.props.isReadOnly) {
+      let outputBox = this.cm.getCodeMirror();
+      outputBox.setValue(this.props.value);
+      console.log("here");
     }
     return (
       <CodeMirror

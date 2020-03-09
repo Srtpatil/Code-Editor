@@ -62,7 +62,15 @@ class App extends Component {
     let urlBase = "https://api.judge0.com/submissions/";
 
     postData(urlBase, data).then(res => {
-      getData("https://api.judge0.com/submissions/" + res);
+      setTimeout(async () => {
+        const result = await getData(
+          "https://api.judge0.com/submissions/" + res
+        );
+        this.setState({
+          outputText: result.stdout
+        });
+        console.log(this.state.outputText);
+      }, 1000);
     });
 
     async function getData(url) {
@@ -70,33 +78,35 @@ class App extends Component {
       console.log(url);
 
       const output = await response.json();
-      console.log(output);
+      return output;
     }
+
     async function postData(url = "", data = {}) {
-      // Default options are marked with *
       console.log("sending");
       const response = await fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
+        method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json"
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
+        body: JSON.stringify(data)
       });
-      let token = await response.json(); // parses JSON response into native JavaScript objects
+      let token = await response.json();
       return await token.token;
-      // let output = await fetch(
-      //   urlBase + token.token.toString()
-      // ).then(response => response.json());
-      // await console.log(output);
-
-      // return await output;
     }
   };
 
   render() {
-    console.log(this.state.inputText);
+    console.log(this.state);
+
+    if (this.state.isReset) {
+      this.setState({
+        code: "",
+        inputText: "",
+        outputText: ""
+      });
+    }
+
     return (
       <div className="App">
         <h1>Code Editor</h1>
@@ -141,6 +151,7 @@ class App extends Component {
                 isReadOnly={true}
                 lineNumber={false}
                 autoFocus={false}
+                value={this.state.outputText}
               />
             </div>
           </div>
