@@ -31,10 +31,7 @@ class Toolbar extends Component {
           selected={this.props.selected}
           id="theme"
         />
-
-        <Button class="fullscreen" clicked={this.props.fullScreen}>
-          <span class="glyphicon glyphicon-fullscreen"></span>
-        </Button>
+        <label>Press F11 for full screen</label>
         <Button class="reset" clicked={this.props.reset}>
           <span class="glyphicon glyphicon-refresh"></span>
         </Button>

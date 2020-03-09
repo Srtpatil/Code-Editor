@@ -26,9 +26,9 @@ class Editor extends Component {
         options={{
           mode: this.props.language,
           theme: this.props.theme,
-          lineNumbers: true,
+          lineNumbers: this.props.lineNumber,
           autoCloseTags: true,
-          autofocus: this.props.isFullScreen,
+          autofocus: this.props.autofocus,
           extraKeys: {
             F11: function(cm) {
               cm.setOption("fullScreen", !cm.getOption("fullScreen"));
@@ -36,7 +36,8 @@ class Editor extends Component {
             Esc: function(cm) {
               if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
             }
-          }
+          },
+          readOnly: this.props.isReadOnly
         }}
         onChange={this.props.changed}
       />
