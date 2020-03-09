@@ -9,12 +9,20 @@ class App extends Component {
     theme: "material-darker",
     language: "text/x-csrc",
     isFullScreen: false,
-    isReset: false
+    isReset: false,
+    inputText: "",
+    outputText: ""
   };
 
   editorUpdated = newCode => {
     this.setState({
       code: newCode
+    });
+  };
+
+  inputUpdated = newInput => {
+    this.setState({
+      inputText: newInput
     });
   };
 
@@ -45,6 +53,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.inputText);
     return (
       <div className="App">
         <h1>Code Editor</h1>
@@ -76,10 +85,7 @@ class App extends Component {
           <div className="IO-container">
             <div className="input-container">
               <Editor
-                changed={this.editorUpdated}
-                title=""
-                width=""
-                height=""
+                changed={this.inputUpdated}
                 theme={this.state.theme}
                 isReadOnly={false}
                 lineNumber={false}
@@ -90,10 +96,7 @@ class App extends Component {
               <span className="output-title">Output</span>
 
               <Editor
-                changed={this.editorUpdated}
-                title=""
-                width=""
-                height=""
+                // changed={this.editorUpdated}
                 theme={this.state.theme}
                 isReadOnly={true}
                 lineNumber={false}

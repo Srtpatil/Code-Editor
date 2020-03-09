@@ -1,4 +1,4 @@
-.btn {
+.bttn {
   border: none;
   background-color: white;
   box-shadow: inset 1px 0px 5px #babebe;
@@ -6,6 +6,7 @@
   margin: 0.1rem;
   width: 50px;
   justify-self: flex-start;
+  border-radius: 4px;
 }
 
 .run {
@@ -18,10 +19,18 @@
   box-shadow: none;
   cursor: pointer;
   height: 90%;
+  padding: 6px 12px;
+  line-height: 1.42px;
+  font-size: 14px;
 }
 
 .reset {
   position: absolute;
   right: 0;
   margin: 0;
+}
+
+.run:hover,
+.run:visited {
+  color: #fff;
 }
