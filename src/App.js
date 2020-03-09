@@ -75,7 +75,6 @@ class App extends Component {
 
     async function getData(url) {
       const response = await fetch(url);
-      console.log(url);
 
       const output = await response.json();
       return output;
@@ -101,9 +100,7 @@ class App extends Component {
 
     if (this.state.isReset) {
       this.setState({
-        code: "",
-        inputText: "",
-        outputText: ""
+        code: ""
       });
     }
 
