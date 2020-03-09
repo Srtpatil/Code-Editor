@@ -2,6 +2,7 @@ import CodeMirror from "react-codemirror";
 import React, { Component } from "react";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/xml/xml";
+import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 import "codemirror/addon/edit/closetag";
 import "./editor.css";

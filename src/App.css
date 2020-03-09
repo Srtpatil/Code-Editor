@@ -1,0 +1,17 @@
+body {
+  box-sizing: border-box;
+  background-color: #f3f7f7;
+  height: 100vh;
+}
+
+.editor-container {
+  width: 70%;
+  height: calc(100vh - 130px);
+  margin: 0.5rem;
+  /* box-shadow: 1px 2px 5px #babebe; */
+}
+
+.CodeMirror,
+.ReactCodeMirror {
+  height: 100%;
+}
