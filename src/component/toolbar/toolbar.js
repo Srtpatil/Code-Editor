@@ -24,6 +24,8 @@ class Toolbar extends Component {
           selected={this.props.selected}
           id="language"
         />
+
+        <label>Select Theme : </label>
         <Dropdown
           options={this.themes}
           selected={this.props.selected}
@@ -33,7 +35,7 @@ class Toolbar extends Component {
         <Button class="fullscreen" clicked={this.props.fullScreen}>
           <span class="glyphicon glyphicon-fullscreen"></span>
         </Button>
-        <Button class="reset">
+        <Button class="reset" clicked={this.props.reset}>
           <span class="glyphicon glyphicon-refresh"></span>
         </Button>
       </div>

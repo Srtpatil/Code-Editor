@@ -5,10 +5,11 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    code: "hello World!",
+    code: "",
     theme: "dracula",
     language: "clike",
-    isFullScreen: false
+    isFullScreen: false,
+    isReset: false
   };
 
   editorUpdated = newCode => {
@@ -27,8 +28,12 @@ class App extends Component {
         language: e.target.value
       });
     }
+  };
 
-    console.log(this.state);
+  resetCode = () => {
+    this.setState(prevState => {
+      return { isReset: !prevState.isReset };
+    });
   };
 
   fullScreenToggle = () => {
@@ -46,7 +51,9 @@ class App extends Component {
         <Toolbar
           selected={this.selectHandler}
           fullScreen={this.fullScreenToggle}
+          reset={this.resetCode}
         />
+
         <div className="editor-container">
           <Editor
             changed={this.editorUpdated}
@@ -57,6 +64,8 @@ class App extends Component {
             language={this.state.language}
             value={this.state.code}
             isFullScreen={this.state.isFullScreen}
+            reset={this.state.isReset}
+            helper={this.resetCode}
           />
         </div>
       </div>
