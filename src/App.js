@@ -6,8 +6,8 @@ import "./App.css";
 class App extends Component {
   state = {
     code: "",
-    theme: "dracula",
-    language: "clike",
+    theme: "material-darker",
+    language: "text/x-csrc",
     isFullScreen: false,
     isReset: false
   };

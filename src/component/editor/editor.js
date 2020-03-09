@@ -7,6 +7,7 @@ import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 import "codemirror/addon/edit/closetag";
 import "./editor.css";
+import "codemirror/theme/material-darker.css";
 import "codemirror/addon/display/fullscreen.css";
 import "codemirror/addon/display/fullscreen";
 
@@ -23,6 +24,7 @@ class Editor extends Component {
     return (
       <CodeMirror
         ref={c => (this.cm = c)}
+        value={this.props.value}
         options={{
           mode: this.props.language,
           theme: this.props.theme,
