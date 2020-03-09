@@ -1,0 +1,12 @@
+.toolbar {
+  height: 50px;
+  width: 70%;
+  /* box-shadow: 1px 0px 5px #babebe; */
+  position: relative;
+}
+
+.theme_tag {
+  line-height: 10px;
+  padding: 4px;
+  margin-left: auto;
+}

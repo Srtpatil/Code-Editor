@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./dropdown.css";
 
 class Dropdown extends Component {
   option = Object.keys(this.props.options).map(key => {
@@ -13,7 +14,11 @@ class Dropdown extends Component {
 
   render() {
     return (
-      <select onChange={this.props.selected} id={this.props.id}>
+      <select
+        onChange={this.props.selected}
+        id={this.props.id}
+        className="select_box"
+      >
         {this.option}
       </select>
     );

@@ -1,0 +1,18 @@
+.select_box {
+  outline: 0;
+  border: 0 !important;
+  margin: 0.4rem;
+  height: 90%;
+  width: 150px;
+  box-shadow: inset 1px 0px 12px #babebe;
+}
+/* Remove IE arrow */
+.select_box::-ms-expand {
+  display: none;
+}
+
+.select_box {
+  flex: 1;
+  padding: 0.25rem 0.5em;
+  cursor: pointer;
+}

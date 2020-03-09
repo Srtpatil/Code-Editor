@@ -5,7 +5,7 @@ import "codemirror/lib/codemirror.css";
 import "./App.css";
 
 class App extends Component {
-  state = {    
+  state = {
     code: "hello World!",
     theme: "dracula",
     language: "clike",
@@ -37,15 +37,17 @@ class App extends Component {
         <h1>Code Editor</h1>
 
         <Toolbar selected={this.selectHandler} />
-        <Editor
-          changed={this.editorUpdated}
-          title=""
-          width=""
-          height=""
-          theme={this.state.theme}
-          language={this.state.language}
-          value={this.state.code}
-        />
+        <div className="editor-container">
+          <Editor
+            changed={this.editorUpdated}
+            title=""
+            width=""
+            height=""
+            theme={this.state.theme}
+            language={this.state.language}
+            value={this.state.code}
+          />
+        </div>
       </div>
     );
   }

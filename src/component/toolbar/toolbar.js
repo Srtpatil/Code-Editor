@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import Button from "../button/button";
 import Dropdown from "../dropdown/dropdown";
+import "./toolbar.css";
+
 class Toolbar extends Component {
   languages = {
-    clike: ["C", "C++", "Java"],
-    Python: "Python"
+    "text/x-csrc": "C",
+    "text/x-c++src": "C++",
+    "text/x-java": "Java",
+    Python: "Python",
+    xml: "xml"
   };
 
   themes = {
@@ -19,17 +24,16 @@ class Toolbar extends Component {
           selected={this.props.selected}
           id="language"
         />
-
         <Dropdown
           options={this.themes}
           selected={this.props.selected}
           id="theme"
         />
 
-        <Button>
+        <Button class="fullscreen">
           <span class="glyphicon glyphicon-fullscreen"></span>
         </Button>
-        <Button>
+        <Button class="reset">
           <span class="glyphicon glyphicon-refresh"></span>
         </Button>
       </div>
