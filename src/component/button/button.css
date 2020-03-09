@@ -1,4 +1,19 @@
 .btn {
   border: none;
   background-color: white;
+  box-shadow: inset 1px 0px 5px #babebe;
+  height: 90%;
+  margin: 0.4rem;
+  width: 45px;
+  justify-self: flex-start;
+}
+
+.fullscreen {
+  position: absolute;
+  right: 50px;
+}
+
+.reset {
+  position: absolute;
+  right: 0;
 }

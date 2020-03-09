@@ -32,7 +32,6 @@ class App extends Component {
   };
 
   fullScreenToggle = () => {
-
     this.setState(prevState => {
       return {
         isFullScreen: !prevState.isFullScreen
@@ -41,11 +40,9 @@ class App extends Component {
   };
 
   render() {
-
     return (
       <div>
         <h1>Code Editor</h1>
-
         <Toolbar
           selected={this.selectHandler}
           fullScreen={this.fullScreenToggle}
@@ -62,18 +59,6 @@ class App extends Component {
             isFullScreen={this.state.isFullScreen}
           />
         </div>
-
-        <div className="in-out-container">
-          <Editor
-              changed={this.editorUpdated}
-              title=""
-              width=""
-              height=""
-              theme={this.state.theme}
-              value={this.state.code}
-            />
-        </div>
-        
       </div>
     );
   }
