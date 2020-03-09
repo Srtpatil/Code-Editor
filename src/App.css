@@ -9,7 +9,7 @@ body {
 
 .editor-container {
   width: 70%;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 135px);
   margin: 0.5rem;
   /* box-shadow: 1px 2px 5px #babebe; */
 }
@@ -33,7 +33,7 @@ body {
 
 .input-container {
   height: 46%;
-  margin-bottom: 20px;
+  margin-bottom: 1.8%;
 }
 
 .output-container {
@@ -48,7 +48,6 @@ body {
 .output-title {
   font-size: 20px;
   margin-left: 20px;
-  display: block; 
+  display: block;
   margin-bottom: 10px;
 }
-
