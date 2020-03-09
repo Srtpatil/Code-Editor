@@ -11,3 +11,8 @@
   padding: 4px;
   margin-left: auto;
 }
+
+.theme-txt {
+  color: #fff;
+  font-weight: bolder;
+}

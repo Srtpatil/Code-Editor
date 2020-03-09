@@ -5,6 +5,7 @@
   height: 90%;
   width: 150px;
   box-shadow: inset 1px 0px 12px #babebe;
+  font-weight: bold;
 }
 /* Remove IE arrow */
 .select_box::-ms-expand {

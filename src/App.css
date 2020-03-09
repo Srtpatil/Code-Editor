@@ -1,7 +1,10 @@
 body {
   box-sizing: border-box;
-  background-color: #f3f7f7;
+  background-color: #141313;
   height: 100vh;
+  /* font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono",
+    "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace,
+    serif; */
 }
 
 .editor-container {

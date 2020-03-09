@@ -2,18 +2,26 @@
   border: none;
   background-color: white;
   box-shadow: inset 1px 0px 5px #babebe;
-  height: 90%;
-  margin: 0.4rem;
-  width: 45px;
+  height: 95%;
+  margin: 0.1rem;
+  width: 50px;
   justify-self: flex-start;
 }
 
-.fullscreen {
+.run {
+  width: 80px;
   position: absolute;
-  right: 50px;
+  right: 60px;
+  background: #e31d3b;
+  color: #fff;
+  font-weight: bolder;
+  box-shadow: none;
+  cursor: pointer;
+  height: 90%;
 }
 
 .reset {
   position: absolute;
   right: 0;
+  margin: 0;
 }
