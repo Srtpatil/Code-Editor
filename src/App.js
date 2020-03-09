@@ -62,20 +62,19 @@ class App extends Component {
     let urlBase = "https://api.judge0.com/submissions/";
 
     postData(urlBase, data).then(res => {
+      let query = urlBase + res;
       setTimeout(async () => {
-        const result = await getData(
-          "https://api.judge0.com/submissions/" + res
-        );
+        let op = await getData(query);
         this.setState({
-          outputText: result.stdout
+          outputText: op.stdout
         });
-        console.log(this.state.outputText);
+
+        console.log(this.state);
       }, 1000);
     });
 
     async function getData(url) {
       const response = await fetch(url);
-      console.log(url);
 
       const output = await response.json();
       return output;
@@ -148,6 +147,7 @@ class App extends Component {
 
               <Editor
                 theme={this.state.theme}
+                reset={this.state.isReset}
                 isReadOnly={true}
                 lineNumber={false}
                 autoFocus={false}
