@@ -62,14 +62,14 @@ class App extends Component {
     let urlBase = "https://api.judge0.com/submissions/";
 
     postData(urlBase, data).then(res => {
-      let query = urlBase + res;
       setTimeout(async () => {
-        let op = await getData(query);
+        const result = await getData(
+          "https://api.judge0.com/submissions/" + res
+        );
         this.setState({
-          outputText: op.stdout
+          outputText: result.stdout
         });
-
-        console.log(this.state);
+        console.log(this.state.outputText);
       }, 1000);
     });
 
@@ -100,9 +100,7 @@ class App extends Component {
 
     if (this.state.isReset) {
       this.setState({
-        code: "",
-        inputText: "",
-        outputText: ""
+        code: ""
       });
     }
 
@@ -147,7 +145,6 @@ class App extends Component {
 
               <Editor
                 theme={this.state.theme}
-                reset={this.state.isReset}
                 isReadOnly={true}
                 lineNumber={false}
                 autoFocus={false}
