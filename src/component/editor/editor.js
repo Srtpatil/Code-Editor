@@ -25,12 +25,6 @@ class Editor extends Component {
       let outputBox = this.cm.getCodeMirror();
       outputBox.setValue(this.props.value);
     }
-
-    if (this.props.value !== "" && this.props.isReadOnly) {
-      let outputBox = this.cm.getCodeMirror();
-      outputBox.setValue(this.props.value);
-      console.log("here");
-    }
     return (
       <CodeMirror
         ref={c => (this.cm = c)}
