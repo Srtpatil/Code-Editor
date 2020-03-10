@@ -47,8 +47,16 @@ class App extends Component {
   fullScreenToggle = () => {
     this.setState(prevState => {
       return {
-        isFullScreen: !prevState.isFullScreen
+        isFullScreen: true
       };
+    });
+  };
+
+  fullscreenhelper = () => {
+    console.log("called");
+
+    this.setState({
+      isFullScreen: false
     });
   };
 
@@ -75,7 +83,6 @@ class App extends Component {
 
     async function getData(url) {
       const response = await fetch(url);
-      console.log(url);
 
       const output = await response.json();
       return output;
@@ -114,7 +121,7 @@ class App extends Component {
           reset={this.resetCode}
           runCode={this.runCode}
         />
-        <span className="input-title">Input</span>
+        <span className="input-title ">Input</span>
         <div className="interface">
           <div className="editor-container">
             <Editor
@@ -128,6 +135,7 @@ class App extends Component {
               isReadOnly={false}
               lineNumber={true}
               autoFocus={true}
+              fullscreenhelper={this.fullscreenhelper}
             />
           </div>
 

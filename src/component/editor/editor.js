@@ -21,10 +21,15 @@ class Editor extends Component {
       this.props.helper();
     }
 
+    if (this.props.isFullScreen) {
+      let editor = this.cm.getCodeMirror();
+      editor.setOption("fullScreen", true);
+      this.props.fullscreenhelper();
+    }
+
     if (this.props.value !== "" && this.props.isReadOnly) {
       let outputBox = this.cm.getCodeMirror();
       outputBox.setValue(this.props.value);
-      console.log("here");
     }
     return (
       <CodeMirror
