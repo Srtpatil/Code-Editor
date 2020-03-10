@@ -101,9 +101,7 @@ class App extends Component {
 
     if (this.state.isReset) {
       this.setState({
-        code: "",
-        inputText: "",
-        outputText: ""
+        code: ""
       });
     }
 
