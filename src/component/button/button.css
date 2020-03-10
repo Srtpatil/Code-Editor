@@ -12,7 +12,7 @@
 .run {
   width: 80px;
   position: absolute;
-  right: 60px;
+  right: 120px;
   background: #e31d3b;
   color: #fff;
   font-weight: bolder;
@@ -27,6 +27,12 @@
 .reset {
   position: absolute;
   right: 0;
+  margin: 0;
+}
+
+.fullscreen {
+  position: absolute;
+  right: 60px;
   margin: 0;
 }
 
