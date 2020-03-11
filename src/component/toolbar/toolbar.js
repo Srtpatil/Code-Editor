@@ -40,6 +40,9 @@ class Toolbar extends Component {
         <Button class="reset" clicked={this.props.reset}>
           <span class="glyphicon glyphicon-refresh"></span>
         </Button>
+        <Button class="downloadCode" clicked={this.props.downloadCode}>
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </Button>
       </div>
     );
   }

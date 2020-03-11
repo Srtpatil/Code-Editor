@@ -116,7 +116,7 @@ class App extends Component {
     });
   };
 
-  downloadFile = () => {
+  downloadCode = () => {
     let extention = "";
     switch (this.state.language) {
       case "text/x-csrc":
@@ -154,8 +154,6 @@ class App extends Component {
       stdin: this.state.inputText
     };
 
-    console.log(data);
-
     let urlBase = "https://api.judge0.com/submissions/";
 
     let sendText =
@@ -166,6 +164,8 @@ class App extends Component {
         const result = await getData(
           "https://api.judge0.com/submissions/" + res + sendText
         );
+
+        console.log(result);
 
         if (result.status_id !== 3) {
           this.parseId(result.status_id);
@@ -277,6 +277,7 @@ class App extends Component {
               fullScreen={this.fullScreenToggle}
               reset={this.resetCode}
               runCode={this.runCode}
+              downloadCode={this.downloadCode}
             />
           </div>
           <div class="Input">Input</div>

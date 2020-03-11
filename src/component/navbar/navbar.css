@@ -14,25 +14,3 @@
   margin-left: 50px;
   color: white;
 }
-
-.nav-item {
-  list-style-type: none;
-  width: 80%;
-  margin: 0;
-  padding: 0;
-  margin-left: 100px;
-  font-size: 18px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  color: white;
-}
-
-.nav-item li a {
-  display: block;
-  text-align: left;
-  padding: 14px 16px;
-  text-decoration: none;
-  color: white;
-
-}
