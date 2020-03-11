@@ -2,8 +2,8 @@
   outline: 0;
   border: 0 !important;
   margin: 0.4rem;
-  height: 90%;
-  width: 150px;
+  height: 80%;
+  max-width: 150px;
   box-shadow: inset 1px 0px 12px #babebe;
   font-weight: bold;
 }

@@ -26,7 +26,6 @@ class Toolbar extends Component {
           selected={this.props.selected}
           id="language"
         />
-        <label className="theme-txt">Select Theme : </label>
         <Dropdown
           options={this.themes}
           selected={this.props.selected}
@@ -40,6 +39,9 @@ class Toolbar extends Component {
         </Button>
         <Button class="reset" clicked={this.props.reset}>
           <span class="glyphicon glyphicon-refresh"></span>
+        </Button>
+        <Button class="downloadCode" clicked={this.props.downloadCode}>
+          <span class="glyphicon glyphicon-download-alt"></span>
         </Button>
       </div>
     );

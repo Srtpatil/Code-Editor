@@ -11,7 +11,12 @@ body {
     serif; */
 }
 
-.editor-container {
+.CodeMirror,
+.ReactCodeMirror {
+  height: 100%;
+}
+
+/* .editor-container {
   width: 70%;
   height: calc(100vh - 135px);
   margin: 0.5rem;
@@ -72,4 +77,66 @@ body {
 
 .loafing {
   display: inline-block;
+} */
+.App {
+  width: 100%;
+  height: 100vh;
+}
+
+.container {
+  display: grid;
+  width: 100%;
+  height: 90%;
+  grid-template-areas:
+    "Toolbar Input"
+    "Editor Input-box"
+    "Editor Output"
+    "Editor Output-box";
+  grid-template-columns: 1fr 0.5fr;
+  grid-template-rows: 60px 1fr 60px 1fr;
+  grid-gap: 5px;
+}
+.container > div {
+  /* border: 1px dashed #888; */
+  /* border here */
+}
+
+.Toolbar {
+  grid-area: Toolbar;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background: rgba(240, 240, 240, 0.5);
+  box-shadow: 1px 1px 4px rgb(197, 157, 157);
+}
+.Input {
+  grid-area: Input;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: #0069d9;
+  border-radius: 5px;
+}
+.Editor {
+  grid-area: Editor;
+}
+.Input-box {
+  grid-area: Input-box;
+}
+.Output {
+  grid-area: Output;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: #0069d9;
+  border-radius: 5px;
+}
+.Output-box {
+  grid-area: Output-box;
 }

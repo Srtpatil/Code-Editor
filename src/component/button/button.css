@@ -2,41 +2,46 @@
   border: none;
   background-color: white;
   box-shadow: inset 1px 0px 5px #babebe;
-  height: 95%;
+  height: 80%;
   margin: 0.1rem;
   width: 50px;
-  justify-self: flex-start;
   border-radius: 4px;
 }
 
 .run {
   width: 80px;
-  position: absolute;
-  right: 120px;
+  /* position: absolute; */
+  /* right: 120px; */
   background: #e31d3b;
   color: #fff;
   font-weight: bolder;
   box-shadow: none;
   cursor: pointer;
-  height: 90%;
   padding: 6px 12px;
   line-height: 1.42px;
   font-size: 14px;
+  margin: 4px;
+
+  margin-left: auto;
 }
 
 .reset {
-  position: absolute;
-  right: 0;
-  margin: 0;
+  /* position: absolute;
+  right: 0; */
+  margin: 4px;
 }
 
 .fullscreen {
-  position: absolute;
-  right: 60px;
-  margin: 0;
+  /* position: absolute; */
+  /* right: 60px; */
+  margin: 4px;
 }
 
 .run:hover,
 .run:visited {
   color: #fff;
+}
+
+.downloadCode {
+  margin: 4px;
 }
