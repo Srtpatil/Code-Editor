@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "../button/button";
 import Dropdown from "../dropdown/dropdown";
+
 import "./toolbar.css";
 
 class Toolbar extends Component {
@@ -17,6 +18,7 @@ class Toolbar extends Component {
     dracula: "dracula",
     material: "material"
   };
+
   render() {
     return (
       <div className="toolbar">

@@ -65,3 +65,7 @@ body {
   border-radius: 4px;
   color: #fff;
 }
+
+.loafing {
+  display: inline-block;
+}

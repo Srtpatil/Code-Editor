@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Editor from "./component/editor/editor";
 import Toolbar from "./component/toolbar/toolbar";
+import Loader from "./component/loader/loader";
 import "./App.css";
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     language: "text/x-csrc",
     isFullScreen: false,
     isReset: false,
+    isRunning: false,
     inputText: "",
     outputText: ""
   };
@@ -53,14 +55,17 @@ class App extends Component {
   };
 
   fullscreenhelper = () => {
-    console.log("called");
-
     this.setState({
       isFullScreen: false
     });
   };
 
   runCode = () => {
+    this.setState(prevState => {
+      return {
+        isRunning: !prevState.isRunning
+      };
+    });
     let data = {
       source_code: this.state.code,
       language_id: "48",
@@ -69,13 +74,22 @@ class App extends Component {
 
     let urlBase = "https://api.judge0.com/submissions/";
 
+    let sendText =
+      "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
+
     postData(urlBase, data).then(res => {
       setTimeout(async () => {
         const result = await getData(
-          "https://api.judge0.com/submissions/" + res
+          "https://api.judge0.com/submissions/" + res + sendText
         );
+        console.log(result, res);
         this.setState({
-          outputText: result.stdout
+          outputText: result
+        });
+        this.setState(prevState => {
+          return {
+            isRunning: !prevState.isRunning
+          };
         });
         console.log(this.state.outputText);
       }, 1000);
@@ -85,6 +99,7 @@ class App extends Component {
       const response = await fetch(url);
 
       const output = await response.json();
+
       return output;
     }
 
@@ -110,6 +125,10 @@ class App extends Component {
       this.setState({
         code: ""
       });
+    }
+    let loading = null;
+    if (this.state.isRunning) {
+      loading = <Loader />;
     }
 
     return (
@@ -150,7 +169,8 @@ class App extends Component {
               />
             </div>
             <div className="output-container">
-              <span className="output-title">Output</span>
+              <span className="output-title">Output </span>
+              <span className="loading">{loading}</span>
 
               <Editor
                 theme={this.state.theme}
