@@ -7,14 +7,15 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    code: "",
+    code: "#include <stdio.h>\nint main()\n{\n   return 0;\n}",
     theme: "material-darker",
     language: "text/x-csrc",
     isFullScreen: false,
     isReset: false,
     isRunning: false,
     inputText: "",
-    outputText: ""
+    outputText: "",
+    isSelected: false
   };
 
   language_id = {
@@ -91,9 +92,16 @@ class App extends Component {
       });
     } else if (e.target.id === "language") {
       this.setState({
-        language: e.target.value
+        language: e.target.value,
+        isSelected: true
       });
     }
+  };
+
+  selectHelper = () => {
+    this.setState({
+      isSelected: false
+    });
   };
 
   resetCode = () => {
@@ -165,7 +173,7 @@ class App extends Component {
           "https://api.judge0.com/submissions/" + res + sendText
         );
 
-        console.log(result);
+        console.log(this.state);
 
         if (result.status_id !== 3) {
           this.parseId(result.status_id);
@@ -294,6 +302,8 @@ class App extends Component {
               lineNumber={true}
               autoFocus={true}
               fullscreenhelper={this.fullscreenhelper}
+              isSelected={this.state.isSelected}
+              selectHelper={this.selectHelper}
             />
           </div>
           <div class="Input-box">

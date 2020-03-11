@@ -31,6 +31,42 @@ class Editor extends Component {
       let outputBox = this.cm.getCodeMirror();
       outputBox.setValue(this.props.value);
     }
+
+    // "text/x-csrc": "48",
+    // "text/x-c++src": "54",
+    // "text/x-java": "62",
+    // Python: "71"
+
+    if (this.props.isSelected) {
+      let text = "";
+      switch (this.props.language) {
+        case "text/x-csrc":
+          text = "#include <stdio.h>\nint main()\n{\n   return 0;\n}";
+          break;
+
+        case "text/x-c++src":
+          text =
+            "#include <iostream>\nusing namespace std;\n\nint main() \n{\n\treturn 0;\n}";
+          break;
+
+        case "text/x-java":
+          text =
+            "public class Main {\n    public static void main(String[] args) {\n        \n    }\n}";
+          break;
+
+        case "Python":
+          text = "#Your Python came here!";
+          break;
+
+        default:
+          text = "";
+      }
+
+      let editor = this.cm.getCodeMirror();
+      editor.setValue(text);
+      this.props.selectHelper();
+    }
+
     return (
       <CodeMirror
         ref={c => (this.cm = c)}
