@@ -9,8 +9,7 @@ class Toolbar extends Component {
     "text/x-csrc": "C",
     "text/x-c++src": "C++",
     "text/x-java": "Java",
-    Python: "Python",
-    xml: "xml"
+    Python: "Python"
   };
 
   themes = {

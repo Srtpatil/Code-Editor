@@ -28,8 +28,8 @@ class Editor extends Component {
     }
 
     if (this.props.value !== "" && this.props.isReadOnly) {
-      // let outputBox = this.cm.getCodeMirror();
-      // outputBox.setValue(this.props.value);
+      let outputBox = this.cm.getCodeMirror();
+      outputBox.setValue(this.props.value);
     }
     return (
       <CodeMirror

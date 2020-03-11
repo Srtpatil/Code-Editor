@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Editor from "./component/editor/editor";
 import Toolbar from "./component/toolbar/toolbar";
 import Loader from "./component/loader/loader";
+import Navbar from "./component/navbar/navbar";
 import "./App.css";
 
 class App extends Component {
@@ -14,6 +15,13 @@ class App extends Component {
     isRunning: false,
     inputText: "",
     outputText: ""
+  };
+
+  language_id = {
+    "text/x-csrc": "48",
+    "text/x-c++src": "54",
+    "text/x-java": "62",
+    Python: "71"
   };
 
   editorUpdated = newCode => {
@@ -68,9 +76,11 @@ class App extends Component {
     });
     let data = {
       source_code: this.state.code,
-      language_id: "48",
+      language_id: this.language_id[this.state.language],
       stdin: this.state.inputText
     };
+
+    console.log(data);
 
     let urlBase = "https://api.judge0.com/submissions/";
 
@@ -84,7 +94,7 @@ class App extends Component {
         );
         console.log(result, res);
         this.setState({
-          outputText: result
+          outputText: result.stdout
         });
         this.setState(prevState => {
           return {
@@ -92,7 +102,7 @@ class App extends Component {
           };
         });
         console.log(this.state.outputText);
-      }, 1000);
+      }, 2000);
     });
 
     async function getData(url) {
@@ -133,7 +143,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Code Editor</h1>
+        <Navbar title="Code Editor" />
         <Toolbar
           selected={this.selectHandler}
           fullScreen={this.fullScreenToggle}
