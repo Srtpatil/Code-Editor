@@ -30,6 +30,54 @@ class App extends Component {
     });
   };
 
+  parseId = id => {
+    let txt = null;
+    switch (id) {
+      case 3:
+        txt = "Accepted";
+        break;
+      case 5:
+        txt = "Time Limit Exceeded";
+        break;
+      case 6:
+        txt = "Compilation Error";
+        break;
+      case 7:
+        txt = "Runtime Error (SIGSEGV)";
+        break;
+      case 8:
+        txt = "Runtime Error (SIGXFSZ)";
+        break;
+      case 9:
+        txt = "Runtime Error (SIGFPE)";
+        break;
+      case 10:
+        txt = "Runtime Error (SIGABRT)";
+        break;
+      case 11:
+        txt = "Runtime Error (NZEC)";
+        break;
+      case 12:
+        txt = "Runtime Error (Other)";
+        break;
+
+      case 13:
+        txt = "Internal Error";
+        break;
+
+      case 14:
+        txt = "Exec Format Error";
+        break;
+      default:
+        txt = "error occured while running you code";
+        break;
+    }
+
+    this.setState({
+      outputText: txt
+    });
+  };
+
   inputUpdated = newInput => {
     this.setState({
       inputText: newInput
@@ -68,6 +116,32 @@ class App extends Component {
     });
   };
 
+  downloadFile = () => {
+    let extention = "";
+    switch (this.state.language) {
+      case "text/x-csrc":
+        extention = ".c";
+        break;
+      case "text/x-c++src":
+        extention = ".cpp";
+        break;
+      case "text/x-java":
+        extention = ".java";
+        break;
+      default:
+        extention = ".txt";
+        break;
+    }
+
+    const fileName = "main" + extention;
+    const element = document.createElement("a");
+    const file = new Blob([this.state.code], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = fileName;
+    document.body.appendChild(element);
+    element.click();
+  };
+
   runCode = () => {
     this.setState(prevState => {
       return {
@@ -92,16 +166,19 @@ class App extends Component {
         const result = await getData(
           "https://api.judge0.com/submissions/" + res + sendText
         );
-        console.log(result, res);
-        this.setState({
-          outputText: result.stdout
-        });
+
+        if (result.status_id !== 3) {
+          this.parseId(result.status_id);
+        } else {
+          this.setState({
+            outputText: result.stdout
+          });
+        }
         this.setState(prevState => {
           return {
             isRunning: !prevState.isRunning
           };
         });
-        console.log(this.state.outputText);
       }, 2000);
     });
 
@@ -144,7 +221,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar title="Code Editor" />
-        <Toolbar
+        {/* <Toolbar
           selected={this.selectHandler}
           fullScreen={this.fullScreenToggle}
           reset={this.resetCode}
@@ -190,6 +267,52 @@ class App extends Component {
                 value={this.state.outputText}
               />
             </div>
+          </div>
+        </div> */}
+
+        <div class="container">
+          <div class="Toolbar">
+            <Toolbar
+              selected={this.selectHandler}
+              fullScreen={this.fullScreenToggle}
+              reset={this.resetCode}
+              runCode={this.runCode}
+            />
+          </div>
+          <div class="Input">Input</div>
+          <div class="Editor">
+            <Editor
+              changed={this.editorUpdated}
+              theme={this.state.theme}
+              language={this.state.language}
+              value={this.state.code}
+              isFullScreen={this.state.isFullScreen}
+              reset={this.state.isReset}
+              helper={this.resetCode}
+              isReadOnly={false}
+              lineNumber={true}
+              autoFocus={true}
+              fullscreenhelper={this.fullscreenhelper}
+            />
+          </div>
+          <div class="Input-box">
+            <Editor
+              changed={this.inputUpdated}
+              theme={this.state.theme}
+              isReadOnly={false}
+              lineNumber={false}
+              autoFocus={false}
+            />
+          </div>
+          <div class="Output">Output {loading}</div>
+          <div class="Output-box">
+            <Editor
+              theme={this.state.theme}
+              isReadOnly={true}
+              lineNumber={false}
+              autoFocus={false}
+              value={this.state.outputText}
+            />
           </div>
         </div>
       </div>

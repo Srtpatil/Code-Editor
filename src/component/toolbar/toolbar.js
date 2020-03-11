@@ -26,7 +26,6 @@ class Toolbar extends Component {
           selected={this.props.selected}
           id="language"
         />
-        <label className="theme-txt">Select Theme : </label>
         <Dropdown
           options={this.themes}
           selected={this.props.selected}
