@@ -311,8 +311,8 @@ class App extends Component {
               changed={this.inputUpdated}
               theme={this.state.theme}
               isReadOnly={false}
-              lineNumber={false}
               autoFocus={false}
+              lineNumber={true}
             />
           </div>
           <div class="Output">Output {loading}</div>
@@ -320,9 +320,9 @@ class App extends Component {
             <Editor
               theme={this.state.theme}
               isReadOnly={true}
-              lineNumber={false}
               autoFocus={false}
               value={this.state.outputText}
+              lineNumber={true}
             />
           </div>
         </div>
