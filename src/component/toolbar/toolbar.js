@@ -25,15 +25,19 @@ class Toolbar extends Component {
           options={this.languages}
           selected={this.props.selected}
           id="language"
+          class="ui dropdown"
         />
         <Dropdown
           options={this.themes}
           selected={this.props.selected}
           id="theme"
         />
-        <Button class="run" clicked={this.props.runCode}>
-          Run <span class="glyphicon glyphicon-play"></span>
+
+        <Button class="ui labeled icon button run" clicked={this.props.runCode}>
+          <i class="play icon"></i>
+          Run
         </Button>
+
         <Button class="fullscreen" clicked={this.props.fullScreen}>
           <span class="glyphicon glyphicon-fullscreen"></span>
         </Button>

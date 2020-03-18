@@ -31,54 +31,6 @@ class App extends Component {
     });
   };
 
-  parseId = id => {
-    let txt = null;
-    switch (id) {
-      case 3:
-        txt = "Accepted";
-        break;
-      case 5:
-        txt = "Time Limit Exceeded";
-        break;
-      case 6:
-        txt = "Compilation Error";
-        break;
-      case 7:
-        txt = "Runtime Error (SIGSEGV)";
-        break;
-      case 8:
-        txt = "Runtime Error (SIGXFSZ)";
-        break;
-      case 9:
-        txt = "Runtime Error (SIGFPE)";
-        break;
-      case 10:
-        txt = "Runtime Error (SIGABRT)";
-        break;
-      case 11:
-        txt = "Runtime Error (NZEC)";
-        break;
-      case 12:
-        txt = "Runtime Error (Other)";
-        break;
-
-      case 13:
-        txt = "Internal Error";
-        break;
-
-      case 14:
-        txt = "Exec Format Error";
-        break;
-      default:
-        txt = "error occured while running you code";
-        break;
-    }
-
-    this.setState({
-      outputText: txt
-    });
-  };
-
   inputUpdated = newInput => {
     this.setState({
       inputText: newInput
@@ -151,7 +103,9 @@ class App extends Component {
   };
 
   decode = bytes => {
-    var escaped = escape(atob(bytes || ""));
+    console.log("called decode");
+
+    let escaped = escape(atob(bytes || ""));
     try {
       return decodeURIComponent(escaped);
     } catch {
@@ -160,44 +114,71 @@ class App extends Component {
   };
 
   runCode = () => {
-    this.setState(prevState => {
-      return {
-        isRunning: !prevState.isRunning
+    if (this.state.code !== "") {
+      this.setState(prevState => {
+        return {
+          isRunning: !prevState.isRunning
+        };
+      });
+      let data = {
+        source_code: this.state.code,
+        language_id: this.language_id[this.state.language],
+        stdin: this.state.inputText
       };
-    });
-    let data = {
-      source_code: this.state.code,
-      language_id: this.language_id[this.state.language],
-      stdin: this.state.inputText
-    };
 
-    let urlBase = "https://api.judge0.com/submissions/";
+      let urlBase = "https://api.judge0.com/submissions/";
 
-    // let sendText =
-    //   "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
+      // let sendText =
+      //   "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
 
-    postData(urlBase, data).then(res => {
-      setTimeout(async () => {
-        const result = await getData(
-          "https://api.judge0.com/submissions/" + res + "?base64_encoded=true"
+      postData(urlBase, data).then(res => {
+        setTimeout(fetchSubmission(res), 200);
+      });
+
+      let fetchSubmission = async submission_token => {
+        let result = await getData(
+          "https://api.judge0.com/submissions/" +
+            submission_token +
+            "?base64_encoded=true"
         );
 
-        console.log("result ", result);
-        console.log("data ", this.decode(result.stdout));
-        if (result.status_id !== 3) {
-          this.parseId(result.status_id);
+        if (result.status.id <= 2) {
+          setTimeout(fetchSubmission(submission_token), 200);
+          return;
         } else {
+          let output = "";
+          console.log(result);
+          if (result.stdout != null) {
+            output = this.decode(result.stdout);
+          } else if (result.compile_output != null) {
+            output = this.decode(result.compile_output);
+          } else if (result.stderr != null) {
+            output = this.decode(result.stderr);
+          }
+
           this.setState({
-            outputText: result.stdout
+            outputText: output
+          });
+
+          this.setState(prevState => {
+            return {
+              isRunning: !prevState.isRunning
+            };
           });
         }
-        this.setState(prevState => {
-          return {
-            isRunning: !prevState.isRunning
-          };
-        });
-      }, 3000);
-    });
+      };
+    } else {
+      let output = "code dude";
+      this.setState({
+        outputText: output
+      });
+
+      this.setState(prevState => {
+        return {
+          isRunning: false
+        };
+      });
+    }
 
     async function getData(url) {
       const response = await fetch(url);
@@ -208,7 +189,6 @@ class App extends Component {
     }
 
     async function postData(url = "", data = {}) {
-      console.log("sending");
       const response = await fetch(url, {
         method: "POST",
         mode: "cors",
@@ -223,7 +203,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     let scrollClass = "scrollinout";
     if (this.state.isReset) {
       this.setState({
@@ -238,54 +217,6 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar title="Code Editor" />
-        {/* <Toolbar
-          selected={this.selectHandler}
-          fullScreen={this.fullScreenToggle}
-          reset={this.resetCode}
-          runCode={this.runCode}
-        />
-        <span className="input-title ">Input</span>
-        <div className="interface">
-          <div className="editor-container">
-            <Editor
-              changed={this.editorUpdated}
-              theme={this.state.theme}
-              language={this.state.language}
-              value={this.state.code}
-              isFullScreen={this.state.isFullScreen}
-              reset={this.state.isReset}
-              helper={this.resetCode}
-              isReadOnly={false}
-              lineNumber={true}
-              autoFocus={true}
-              fullscreenhelper={this.fullscreenhelper}
-            />
-          </div>
-
-          <div className="IO-container">
-            <div className="input-container">
-              <Editor
-                changed={this.inputUpdated}
-                theme={this.state.theme}
-                isReadOnly={false}
-                lineNumber={false}
-                autoFocus={false}
-              />
-            </div>
-            <div className="output-container">
-              <span className="output-title">Output </span>
-              <span className="loading">{loading}</span>
-
-              <Editor
-                theme={this.state.theme}
-                isReadOnly={true}
-                lineNumber={false}
-                autoFocus={false}
-                value={this.state.outputText}
-              />
-            </div>
-          </div>
-        </div> */}
 
         <div class="container">
           <div class="Toolbar">
