@@ -69,6 +69,7 @@ class Editor extends Component {
 
     return (
       <CodeMirror
+        className={this.props.class}
         ref={c => (this.cm = c)}
         value={this.props.value}
         options={{

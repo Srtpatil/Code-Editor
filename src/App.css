@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -92,14 +92,14 @@ body {
     "Editor Input-box"
     "Editor Output"
     "Editor Output-box";
-  grid-template-columns: 1fr 0.5fr;
-  grid-template-rows: 60px 1fr 60px 1fr;
+  grid-template-columns: 66% 33%;
+  grid-template-rows: 60px 40% 60px 40%;
   grid-gap: 5px;
 }
-.container > div {
+/* .container > div {
   /* border: 1px dashed #888; */
-  /* border here */
-}
+/* border here 
+} */
 
 .Toolbar {
   grid-area: Toolbar;

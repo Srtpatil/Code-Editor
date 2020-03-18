@@ -150,6 +150,15 @@ class App extends Component {
     element.click();
   };
 
+  decode = bytes => {
+    var escaped = escape(atob(bytes || ""));
+    try {
+      return decodeURIComponent(escaped);
+    } catch {
+      return unescape(escaped);
+    }
+  };
+
   runCode = () => {
     this.setState(prevState => {
       return {
@@ -164,17 +173,17 @@ class App extends Component {
 
     let urlBase = "https://api.judge0.com/submissions/";
 
-    let sendText =
-      "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
+    // let sendText =
+    //   "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
 
     postData(urlBase, data).then(res => {
       setTimeout(async () => {
         const result = await getData(
-          "https://api.judge0.com/submissions/" + res + sendText
+          "https://api.judge0.com/submissions/" + res + "?base64_encoded=true"
         );
 
-        console.log(this.state);
-
+        console.log("result ", result);
+        console.log("data ", this.decode(result.stdout));
         if (result.status_id !== 3) {
           this.parseId(result.status_id);
         } else {
@@ -187,7 +196,7 @@ class App extends Component {
             isRunning: !prevState.isRunning
           };
         });
-      }, 2000);
+      }, 3000);
     });
 
     async function getData(url) {
@@ -215,7 +224,7 @@ class App extends Component {
 
   render() {
     console.log(this.state);
-
+    let scrollClass = "scrollinout";
     if (this.state.isReset) {
       this.setState({
         code: ""
@@ -313,6 +322,7 @@ class App extends Component {
               isReadOnly={false}
               autoFocus={false}
               lineNumber={true}
+              class={scrollClass}
             />
           </div>
           <div class="Output">Output {loading}</div>
@@ -323,6 +333,7 @@ class App extends Component {
               autoFocus={false}
               value={this.state.outputText}
               lineNumber={true}
+              class={scrollClass}
             />
           </div>
         </div>
