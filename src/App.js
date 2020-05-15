@@ -15,64 +15,64 @@ class App extends Component {
     isRunning: false,
     inputText: "",
     outputText: "",
-    isSelected: false
+    isSelected: false,
   };
 
   language_id = {
     "text/x-csrc": "48",
     "text/x-c++src": "54",
     "text/x-java": "62",
-    Python: "71"
+    Python: "71",
   };
 
-  editorUpdated = newCode => {
+  editorUpdated = (newCode) => {
     this.setState({
-      code: newCode
+      code: newCode,
     });
   };
 
-  inputUpdated = newInput => {
+  inputUpdated = (newInput) => {
     this.setState({
-      inputText: newInput
+      inputText: newInput,
     });
   };
 
-  selectHandler = e => {
+  selectHandler = (e) => {
     if (e.target.id === "theme") {
       this.setState({
-        theme: e.target.value
+        theme: e.target.value,
       });
     } else if (e.target.id === "language") {
       this.setState({
         language: e.target.value,
-        isSelected: true
+        isSelected: true,
       });
     }
   };
 
   selectHelper = () => {
     this.setState({
-      isSelected: false
+      isSelected: false,
     });
   };
 
   resetCode = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return { isReset: !prevState.isReset };
     });
   };
 
   fullScreenToggle = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
-        isFullScreen: true
+        isFullScreen: true,
       };
     });
   };
 
   fullscreenhelper = () => {
     this.setState({
-      isFullScreen: false
+      isFullScreen: false,
     });
   };
 
@@ -102,7 +102,7 @@ class App extends Component {
     element.click();
   };
 
-  decode = bytes => {
+  decode = (bytes) => {
     console.log("called decode");
 
     let escaped = escape(atob(bytes || ""));
@@ -115,15 +115,15 @@ class App extends Component {
 
   runCode = () => {
     if (this.state.code !== "") {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         return {
-          isRunning: !prevState.isRunning
+          isRunning: !prevState.isRunning,
         };
       });
       let data = {
         source_code: this.state.code,
         language_id: this.language_id[this.state.language],
-        stdin: this.state.inputText
+        stdin: this.state.inputText,
       };
 
       let urlBase = "https://api.judge0.com/submissions/";
@@ -131,11 +131,11 @@ class App extends Component {
       // let sendText =
       //   "?base64_encoded=false&fields=stdout,stderr,status_id,language_id";
 
-      postData(urlBase, data).then(res => {
+      postData(urlBase, data).then((res) => {
         setTimeout(fetchSubmission(res), 200);
       });
 
-      let fetchSubmission = async submission_token => {
+      let fetchSubmission = async (submission_token) => {
         let result = await getData(
           "https://api.judge0.com/submissions/" +
             submission_token +
@@ -157,12 +157,12 @@ class App extends Component {
           }
 
           this.setState({
-            outputText: output
+            outputText: output,
           });
 
-          this.setState(prevState => {
+          this.setState((prevState) => {
             return {
-              isRunning: !prevState.isRunning
+              isRunning: !prevState.isRunning,
             };
           });
         }
@@ -170,12 +170,12 @@ class App extends Component {
     } else {
       let output = "code dude";
       this.setState({
-        outputText: output
+        outputText: output,
       });
 
-      this.setState(prevState => {
+      this.setState((prevState) => {
         return {
-          isRunning: false
+          isRunning: false,
         };
       });
     }
@@ -193,9 +193,9 @@ class App extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
       let token = await response.json();
       return await token.token;
@@ -206,7 +206,7 @@ class App extends Component {
     let scrollClass = "scrollinout";
     if (this.state.isReset) {
       this.setState({
-        code: ""
+        code: "",
       });
     }
     let loading = null;
@@ -256,7 +256,7 @@ class App extends Component {
               class={scrollClass}
             />
           </div>
-          <div class="Output">Output {loading}</div>
+          <div class="Output">{loading === null ? "Output" : loading}</div>
           <div class="Output-box">
             <Editor
               theme={this.state.theme}
