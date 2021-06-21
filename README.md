@@ -1,6 +1,5 @@
 # Online Code Editor
 
-Visit at https://kunalambekar04.github.io/Code-Editor/
-
-![Editor UI](https://github.com/KunalAmbekar04/Code-Editor/blob/master/interface.png)
+## An online tool to write your codes and excute them.
+## Supports creation of sharable link and embedding of editor.
 
